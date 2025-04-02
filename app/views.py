@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, View
 from .models import Note
+from .tasks import task_do_something
 
 # Create your views here.
 class NoteListView(ListView):
@@ -21,5 +22,6 @@ class NoteCreateView(View):
         title = request.POST.get("title")
         content = request.POST.get("content")
 
-        Note.objects.create(title=title, content=content)
+        task_do_something() # contoh proses panjang, hanya masuk queue lom diexec
+        Note.objects.create(title=title, content=content, user=request.user)
         return redirect("index")
