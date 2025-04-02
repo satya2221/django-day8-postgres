@@ -7,6 +7,12 @@
             <button>Create View</button>
         </a>
     </header>
+    <div x-data="{ open:false }">
+        <button @click="open = ! open" class="bg-indigo-600 text-white p-2 rounded-lg">Show Text</button>
+        <div x-show="open">
+            Try the alpine JS
+        </div>
+    </div>
     <main>
         {% for note in notes %}
             <div>{{ note.title }}</div>
